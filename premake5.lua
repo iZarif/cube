@@ -68,8 +68,6 @@ links{
 }
 
 filter("system:macosx")
-includedirs{"enet/include"}
-libdirs{"enet"}
 links{
 "SDL.framework",
 "SDL_image.framework",
@@ -80,15 +78,14 @@ links{
 "OpenGL.framework",
 "Cocoa.framework",
 "z",
-"enet:static",
+"enet",
 "X11"
 }
 
 filter("system:not windows", "system:not macosx")
-includedirs{"enet/include", "/usr/include/SDL"}
-libdirs{"enet"}
+includedirs{"/usr/include/SDL"}
 links{
-"enet:static",
+"enet",
 "SDL",
 "SDL_image",
 "SDL_mixer",

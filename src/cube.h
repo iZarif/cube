@@ -127,6 +127,7 @@ struct dynent                           // players & monsters
     vec attacktarget;                   // delayed attacks
     int anger;                          // how many times already hit by fellow monster
     string name, team;
+    int basetime;
 };
 
 #define SAVEGAMEVERSION 4               // bump if dynent/netprotocol changes or any other savegame/demo data

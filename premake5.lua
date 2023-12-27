@@ -1,7 +1,6 @@
 workspace("cube")
 language("C++")
 configurations{"Debug", "Release"}
-architecture("x32")
 
 filter("configurations:Debug")
 symbols("On")

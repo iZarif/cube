@@ -90,6 +90,7 @@ int main(int argc, char **argv)
     int fs = SDL_FULLSCREEN, par = 0, uprate = 0, maxcl = 4;
     char *sdesc = "", *ip = "", *master = NULL, *passwd = "";
     islittleendian = *((char *)&islittleendian);
+    srand(time(NULL));
 
     #define log(s) conoutf("init: %s", s)
     log("sdl");

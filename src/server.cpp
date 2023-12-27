@@ -13,6 +13,7 @@ struct client                   // server side version of "dynent" type
     string mapvote;
     string name;
     int modevote;
+    int num;
 };
 
 vector<client> clients;
@@ -303,7 +304,11 @@ void localclienttoserver(ENetPacket *packet)
 client &addclient()
 {
     loopv(clients) if(clients[i].type==ST_EMPTY) return clients[i];
-    return clients.add();
+
+    client &client = clients.add();
+
+    client.num = clients.length();
+    return client;
 };
 
 void checkintermission()
@@ -396,18 +401,25 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
                 break;
             }
             case ENET_EVENT_TYPE_RECEIVE:
+            {
+                client *c = (client *)event.peer->data;
+
                 brec += event.packet->dataLength;
-                process(event.packet, (int)event.peer->data); 
+                process(event.packet, c->num); 
                 if(event.packet->referenceCount==0) enet_packet_destroy(event.packet);
                 break;
+            }
+            case ENET_EVENT_TYPE_DISCONNECT:
+            {
+                client *c = (client *)event.peer->data;
 
-            case ENET_EVENT_TYPE_DISCONNECT: 
-                if((int)event.peer->data<0) break;
-                printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
-                clients[(int)event.peer->data].type = ST_EMPTY;
-                send2(true, -1, SV_CDIS, (int)event.peer->data);
+                if(c->num<0) break;
+                printf("disconnected client (%s)\n", clients[c->num].hostname);
+                clients[c->num].type = ST_EMPTY;
+                send2(true, -1, SV_CDIS, c->num);
                 event.peer->data = (void *)-1;
                 break;
+            }
         };
         
         if(numplayers>maxclients)   

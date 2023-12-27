@@ -62,6 +62,7 @@ dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
     m->state = CS_ALIVE;
     m->anger = 0;
     strcpy_s(m->name, t->name);
+    m->basetime = (rnd(4096)) - 4095;
     monsters.add(m);
     return m;
 };

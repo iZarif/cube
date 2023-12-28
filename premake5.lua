@@ -78,8 +78,7 @@ links{
 "OpenGL.framework",
 "Cocoa.framework",
 "z",
-"enet",
-"X11"
+"enet"
 }
 
 filter("system:not windows", "system:not macosx")
@@ -91,6 +90,5 @@ links{
 "SDL2_mixer",
 "z",
 "GL",
-"GLU",
-"X11"
+"GLU"
 }

@@ -10,7 +10,7 @@ Fork of Cube game engine
 2. Install dependencies
 
 ```
-$ sudo apt install libsdl-dev libsdl-image-dev libsdl-mixer-dev
+$ sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev
 ```
 
 3. Clone the repository

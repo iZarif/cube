@@ -102,7 +102,16 @@ COMMANDN(bind, bindkey, ARG_2STR);
 
 void saycommand(char *init)                         // turns input to the command line on or off
 {
-    SDL_EnableUNICODE(saycommandon = (init!=NULL));
+    saycommandon = (init!=NULL);
+
+    if (saycommandon) {
+        SDL_StartTextInput();
+    }
+    else
+    {
+        SDL_StopTextInput();
+    }
+
     if(!editmode) keyrepeat(saycommandon);
     if(!init) init = "";
     strcpy_s(commandbuf, init);
@@ -131,7 +140,7 @@ void pasteconsole()
     SDL_SysWMinfo wminfo;
     SDL_VERSION(&wminfo.version); 
     wminfo.subsystem = SDL_SYSWM_X11;
-    if(!SDL_GetWMInfo(&wminfo)) return;
+    if(!SDL_GetWindowWMInfo(screen, &wminfo)) return;
     int cbsize;
     char *cb = XFetchBytes(wminfo.info.x11.display, &cbsize);
     if(!cb || !cbsize) return;
@@ -200,10 +209,6 @@ void keypress(int code, bool isdown, int cooked)
 
                 case SDLK_v:
                     if(SDL_GetModState()&(KMOD_LCTRL|KMOD_RCTRL)) { pasteconsole(); return; };
-
-                default:
-                    resetcomplete();
-                    if(cooked) { char add[] = { cooked, 0 }; strcat_s(commandbuf, add); };
             };
         }
         else

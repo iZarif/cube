@@ -56,9 +56,9 @@ filter("system:windows")
 includedirs{"includes"}
 libdirs{"libs"}
 links{
-"SDL",
-"SDL_image",
-"SDL_mixer",
+"SDL2",
+"SDL2_image",
+"SDL2_mixer",
 "z",
 "opengl32",
 "enet",
@@ -69,9 +69,9 @@ links{
 
 filter("system:macosx")
 links{
-"SDL.framework",
-"SDL_image.framework",
-"SDL_mixer.framework",
+"SDL2.framework",
+"SDL2_image.framework",
+"SDL2_mixer.framework",
 "CoreAudio.framework",
 "AudioToolbox.framework",
 "AudioUnit.framework",
@@ -83,12 +83,12 @@ links{
 }
 
 filter("system:not windows", "system:not macosx")
-includedirs{"/usr/include/SDL"}
+includedirs{"/usr/include/SDL2"}
 links{
 "enet",
-"SDL",
-"SDL_image",
-"SDL_mixer",
+"SDL2",
+"SDL2_image",
+"SDL2_mixer",
 "z",
 "GL",
 "GLU",

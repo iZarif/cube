@@ -278,9 +278,13 @@ enum    // function signatures for script functions, see command.cpp
 #include <SDL.h>
 #include <SDL_image.h>
 
+extern SDL_Window *screen;
+
 #include <enet/enet.h>
 
 #include <zlib.h>
 
 #include "protos.h"				// external function decls
+
+extern string commandbuf;
 
